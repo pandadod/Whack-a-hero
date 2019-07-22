@@ -1,5 +1,6 @@
 package com.example.whackahero;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivAnswer;
     private int answer;
     private int score;
+    private int nbClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
+                    checkScore(score);
                 }
+                nbClick++;
             }
         });
 
@@ -52,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
+                    checkScore(score);
                 }
+                nbClick++;
             }
         });
 
@@ -64,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
+                    checkScore(score);
                 }
+                nbClick++;
             }
         });
 
@@ -76,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
+                    checkScore(score);
                 }
+                nbClick++;
             }
         });
 
@@ -88,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
+                    checkScore(score);
                 }
+                nbClick++;
             }
         });
 
@@ -100,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
+                    checkScore(score);
                 }
+                nbClick++;
             }
         });
 
@@ -112,7 +126,9 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
+                    checkScore(score);
                 }
+                nbClick++;
             }
         });
 
@@ -124,7 +140,9 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
+                    checkScore(score);
                 }
+                nbClick++;
             }
         });
 
@@ -154,21 +172,32 @@ public class MainActivity extends AppCompatActivity {
                     String url = hero.getUrl();
                     Glide.with(MainActivity.this).load(url).into(ivList.get(i));
                 }
-                new Runnable() {
-                    int intervalle = 2000;
-
+                final int[] intervalle = {2000};
+                Runnable runnable = new Runnable() {
 
                     @Override
                     public void run() {
-                        if (score > 0 && score % 10 == 0) {
-                            intervalle -= 500;
+                        if (score > 0 && score % 10 == 0 && intervalle[0] > 0) {
+                            intervalle[0] -= 500;
                         }
+
                         setImage(heroesList, ivAnswer);
-                        ivAnswer.postDelayed(this, intervalle);
+                        ivAnswer.postDelayed(this, intervalle[0]);
                     }
-                }.run();
+                };
+                runnable.run();
+
             }
         });
+
+
+    }
+
+    private void checkScore(int score) {
+        if (score >= 40) {
+            Intent goToNewActivity = new Intent(MainActivity.this, ScoreActivity.class);
+            startActivity(goToNewActivity);
+        }
     }
 
     private void setImage(List<Hero> heroesList, ImageView ivAnswer) {
