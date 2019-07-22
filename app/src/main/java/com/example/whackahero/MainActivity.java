@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private float speed;
     private ProgressBar lifeBar;
     private GifImageView ivStar;
-
+    private Runnable runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         music.start();
 
         lifeBar = findViewById(R.id.lifebar);
-        ivStar= findViewById(R.id.ivstar);
+        ivStar = findViewById(R.id.ivstar);
         lifeBar.setMax(100);
         lifeBar.setProgress(100);
         final int[] intervalle = {2000};
@@ -266,8 +266,7 @@ public class MainActivity extends AppCompatActivity {
                     countHero++;
                 }
 
-                Runnable runnable = new Runnable() {
-
+                runnable = new Runnable() {
                     @Override
                     public void run() {
                         setImage(heroesList, ivAnswer);
@@ -295,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkLose(int nbClick) {
-        if (nbClick >= 5) {
+        if (nbClick == 5) {
             music.stop();
             Intent goToLoseActivity = new Intent(MainActivity.this, ScoreActivity.class);
             startActivity(goToLoseActivity);
@@ -316,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
                 String urlAnswer = hero.getUrl();
                 answer = index;
                 Glide.with(MainActivity.this).load(urlAnswer).into(ivAnswer);
-                if (iv1.isEnabled() && iv2.isEnabled() &&iv3.isEnabled() &&iv4.isEnabled() &&iv5.isEnabled() &&iv6.isEnabled() &&iv7.isEnabled() &&iv8.isEnabled()) {
+                if (iv1.isEnabled() && iv2.isEnabled() && iv3.isEnabled() && iv4.isEnabled() && iv5.isEnabled() && iv6.isEnabled() && iv7.isEnabled() && iv8.isEnabled()) {
                     nbClick++;
                     lifeBar.setProgress(100 - nbClick * 20);
                     checkLose(nbClick);
