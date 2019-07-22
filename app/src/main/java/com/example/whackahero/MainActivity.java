@@ -155,10 +155,14 @@ public class MainActivity extends AppCompatActivity {
                     Glide.with(MainActivity.this).load(url).into(ivList.get(i));
                 }
                 new Runnable() {
-                    int intervalle = 1000;
+                    int intervalle = 2000;
+
 
                     @Override
                     public void run() {
+                        if (score > 0 && score % 10 == 0) {
+                            intervalle -= 500;
+                        }
                         setImage(heroesList, ivAnswer);
                         ivAnswer.postDelayed(this, intervalle);
                     }
