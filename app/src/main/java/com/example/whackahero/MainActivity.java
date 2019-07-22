@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final int[] intervalle = {2000};
         final TextView tvScore = findViewById(R.id.tvScore);
         ivAnswer = findViewById(R.id.ivAnswer);
         iv1 = findViewById(R.id.iv1);
@@ -42,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
-                    checkScore(score);
+                    checkScore(score, intervalle);
+                    iv1.setEnabled(false);
+
+
                 }
                 nbClick++;
             }
@@ -56,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
-                    checkScore(score);
+                    checkScore(score, intervalle);
+                    iv2.setEnabled(false);
                 }
                 nbClick++;
             }
@@ -70,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
-                    checkScore(score);
+                    checkScore(score, intervalle);
+                    iv3.setEnabled(false);
                 }
                 nbClick++;
             }
@@ -84,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
-                    checkScore(score);
+                    checkScore(score, intervalle);
+                    iv4.setEnabled(false);
                 }
                 nbClick++;
             }
@@ -98,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
-                    checkScore(score);
+                    checkScore(score, intervalle);
+                    iv5.setEnabled(false);
                 }
                 nbClick++;
             }
@@ -112,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
-                    checkScore(score);
+                    checkScore(score, intervalle);
+                    iv6.setEnabled(false);
                 }
                 nbClick++;
             }
@@ -126,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
-                    checkScore(score);
+                    checkScore(score, intervalle);
+                    iv7.setEnabled(false);
                 }
                 nbClick++;
             }
@@ -140,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
                 if (result == answer) {
                     score++;
                     tvScore.setText(String.valueOf(score));
-                    checkScore(score);
+                    checkScore(score, intervalle);
+                    iv8.setEnabled(false);
                 }
                 nbClick++;
             }
@@ -172,16 +183,15 @@ public class MainActivity extends AppCompatActivity {
                     String url = hero.getUrl();
                     Glide.with(MainActivity.this).load(url).into(ivList.get(i));
                 }
-                final int[] intervalle = {2000};
+
                 Runnable runnable = new Runnable() {
 
                     @Override
                     public void run() {
-                        if (score > 0 && score % 10 == 0 && intervalle[0] > 0) {
-                            intervalle[0] -= 500;
-                        }
+
 
                         setImage(heroesList, ivAnswer);
+
                         ivAnswer.postDelayed(this, intervalle[0]);
                     }
                 };
@@ -189,11 +199,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
-    private void checkScore(int score) {
+    private void checkScore(int score, int[] intervalle) {
+        if (score > 0 && score % 10 == 0 && intervalle[0] > 0) {
+            intervalle[0] -= 500;
+        }
         if (score >= 40) {
             Intent goToNewActivity = new Intent(MainActivity.this, ScoreActivity.class);
             startActivity(goToNewActivity);
@@ -208,5 +219,14 @@ public class MainActivity extends AppCompatActivity {
         String urlAnswer = heroAnswer.getUrl();
         answer = index;
         Glide.with(MainActivity.this).load(urlAnswer).into(ivAnswer);
+        iv1.setEnabled(true);
+        iv2.setEnabled(true);
+        iv3.setEnabled(true);
+        iv4.setEnabled(true);
+        iv5.setEnabled(true);
+        iv6.setEnabled(true);
+        iv7.setEnabled(true);
+        iv8.setEnabled(true);
+
     }
 }
