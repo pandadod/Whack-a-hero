@@ -215,6 +215,9 @@ public class MainActivity extends AppCompatActivity {
 
         Random r = new Random();
         int index = r.nextInt((7 - 0) + 1) + 0;
+        if (index == answer) {
+            index = r.nextInt((7 - 0) + 1) + 0;
+        }
         Hero heroAnswer = heroesList.get(index);
         String urlAnswer = heroAnswer.getUrl();
         answer = index;
