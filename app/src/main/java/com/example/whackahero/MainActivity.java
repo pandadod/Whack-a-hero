@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -32,15 +33,19 @@ public class MainActivity extends AppCompatActivity {
     private int nbClick;
     private MediaPlayer music;
     private float speed;
+    private ProgressBar lifeBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         speed = 1;
-        music= MediaPlayer.create(MainActivity.this,R.raw.music_tetris);
+        music = MediaPlayer.create(MainActivity.this, R.raw.music_tetris);
         music.start();
 
+        lifeBar = findViewById(R.id.lifebar);
+        lifeBar.setMax(100);
+        lifeBar.setProgress(100);
         final int[] intervalle = {2000};
         final TextView tvScore = findViewById(R.id.tvScore);
         ivAnswer = findViewById(R.id.ivAnswer);
@@ -51,11 +56,15 @@ public class MainActivity extends AppCompatActivity {
                 int result = 0;
                 if (result == answer) {
                     score++;
-                    tvScore.setText(String.valueOf(score));
+                    tvScore.setText("Score : " +score);
                     checkScore(score, intervalle);
                     iv1.setEnabled(false);
+                } else {
+                    nbClick++;
+                    lifeBar.setProgress(100 - nbClick*20);
+                    checkLose(nbClick);
+                    iv1.setEnabled(false);
                 }
-                nbClick++;
             }
         });
 
@@ -66,11 +75,15 @@ public class MainActivity extends AppCompatActivity {
                 int result = 1;
                 if (result == answer) {
                     score++;
-                    tvScore.setText(String.valueOf(score));
+                    tvScore.setText("Score : " +score);
                     checkScore(score, intervalle);
                     iv2.setEnabled(false);
+                } else {
+                    nbClick++;
+                    lifeBar.setProgress(100 - nbClick*20);
+                    checkLose(nbClick);
+                    iv2.setEnabled(false);
                 }
-                nbClick++;
             }
         });
 
@@ -81,11 +94,15 @@ public class MainActivity extends AppCompatActivity {
                 int result = 2;
                 if (result == answer) {
                     score++;
-                    tvScore.setText(String.valueOf(score));
+                    tvScore.setText("Score : " +score);
                     checkScore(score, intervalle);
                     iv3.setEnabled(false);
+                } else {
+                    nbClick++;
+                    lifeBar.setProgress(100 - nbClick*20);
+                    checkLose(nbClick);
+                    iv3.setEnabled(false);
                 }
-                nbClick++;
             }
         });
 
@@ -96,11 +113,15 @@ public class MainActivity extends AppCompatActivity {
                 int result = 3;
                 if (result == answer) {
                     score++;
-                    tvScore.setText(String.valueOf(score));
+                    tvScore.setText("Score : " +score);
                     checkScore(score, intervalle);
                     iv4.setEnabled(false);
+                } else {
+                    nbClick++;
+                    lifeBar.setProgress(100 - nbClick*20);
+                    checkLose(nbClick);
+                    iv4.setEnabled(false);
                 }
-                nbClick++;
             }
         });
 
@@ -111,11 +132,15 @@ public class MainActivity extends AppCompatActivity {
                 int result = 4;
                 if (result == answer) {
                     score++;
-                    tvScore.setText(String.valueOf(score));
+                    tvScore.setText("Score : " +score);
                     checkScore(score, intervalle);
                     iv5.setEnabled(false);
+                } else {
+                    nbClick++;
+                    lifeBar.setProgress(100 - nbClick*20);
+                    checkLose(nbClick);
+                    iv5.setEnabled(false);
                 }
-                nbClick++;
             }
         });
 
@@ -126,11 +151,15 @@ public class MainActivity extends AppCompatActivity {
                 int result = 5;
                 if (result == answer) {
                     score++;
-                    tvScore.setText(String.valueOf(score));
+                    tvScore.setText("Score : " +score);
                     checkScore(score, intervalle);
                     iv6.setEnabled(false);
+                } else {
+                    nbClick++;
+                    lifeBar.setProgress(100 - nbClick*20);
+                    checkLose(nbClick);
+                    iv6.setEnabled(false);
                 }
-                nbClick++;
             }
         });
 
@@ -141,11 +170,15 @@ public class MainActivity extends AppCompatActivity {
                 int result = 6;
                 if (result == answer) {
                     score++;
-                    tvScore.setText(String.valueOf(score));
+                    tvScore.setText("Score : " +score);
                     checkScore(score, intervalle);
                     iv7.setEnabled(false);
+                } else {
+                    nbClick++;
+                    lifeBar.setProgress(100 - nbClick*20);
+                    checkLose(nbClick);
+                    iv7.setEnabled(false);
                 }
-                nbClick++;
             }
         });
 
@@ -156,11 +189,15 @@ public class MainActivity extends AppCompatActivity {
                 int result = 7;
                 if (result == answer) {
                     score++;
-                    tvScore.setText(String.valueOf(score));
+                    tvScore.setText("Score : " +score);
                     checkScore(score, intervalle);
                     iv8.setEnabled(false);
+                } else {
+                    nbClick++;
+                    lifeBar.setProgress(100 - nbClick*20);
+                    checkLose(nbClick);
+                    iv8.setEnabled(false);
                 }
-                nbClick++;
             }
         });
 
@@ -207,14 +244,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkScore(int score, int[] intervalle) {
         if (score > 0 && score % 10 == 0 && intervalle[0] > 0) {
-            intervalle[0] -= 500;
-            speed += 0.2;
+            intervalle[0] -= 200;
+            speed += 0.1;
             music.setPlaybackParams(music.getPlaybackParams().setSpeed(speed));
+            lifeBar.setProgress(100);
+            nbClick = 0;
         }
-        if (score >= 40) {
+        if (intervalle[0] < 400) {
             music.stop();
             Intent goToNewActivity = new Intent(MainActivity.this, ScoreActivity.class);
             startActivity(goToNewActivity);
+        }
+    }
+
+    private void checkLose(int nbClick) {
+        if (nbClick >= 5) {
+            music.stop();
+            Intent goToLoseActivity = new Intent(MainActivity.this, ScoreActivity.class);
+            startActivity(goToLoseActivity);
         }
     }
 
