@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivAnswer;
     private int answer;
     private int score;
-    private int nbClick;
+    private int missClick;
+    private int countClick;
     private MediaPlayer music;
     private float speed;
     private ProgressBar lifeBar;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 0;
-                clikImage(result, intervalle, tvScore);
+                clickImage(result, intervalle, tvScore);
             }
         });
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 1;
-                clikImage(result, intervalle, tvScore);
+                clickImage(result, intervalle, tvScore);
             }
         });
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 2;
-                clikImage(result, intervalle, tvScore);
+                clickImage(result, intervalle, tvScore);
             }
         });
 
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 3;
-                clikImage(result, intervalle, tvScore);
+                clickImage(result, intervalle, tvScore);
             }
         });
 
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 4;
-                clikImage(result, intervalle, tvScore);
+                clickImage(result, intervalle, tvScore);
             }
         });
 
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 5;
-                clikImage(result, intervalle, tvScore);
+                clickImage(result, intervalle, tvScore);
             }
         });
 
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 6;
-                clikImage(result, intervalle, tvScore);
+                clickImage(result, intervalle, tvScore);
             }
         });
 
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 7;
-                clikImage(result, intervalle, tvScore);
+                clickImage(result, intervalle, tvScore);
             }
         });
 
@@ -172,20 +173,18 @@ public class MainActivity extends AppCompatActivity {
             speed += 0.1;
             music.setPlaybackParams(music.getPlaybackParams().setSpeed(speed));
             lifeBar.setProgress(100);
-            nbClick = 0;
+            missClick = 0;
         }
         if (intervalle[0] < 400) {
             music.stop();
-            Intent goToNewActivity = new Intent(MainActivity.this, ScoreActivity.class);
-            startActivity(goToNewActivity);
+            goToScoreActivity();
         }
     }
 
     private void checkLose(int nbClick) {
         if (nbClick == 5) {
             music.stop();
-            Intent goToLoseActivity = new Intent(MainActivity.this, ScoreActivity.class);
-            startActivity(goToLoseActivity);
+            goToScoreActivity();
         }
     }
 
@@ -204,9 +203,10 @@ public class MainActivity extends AppCompatActivity {
                 answer = index;
                 Glide.with(MainActivity.this).load(urlAnswer).into(ivAnswer);
                 if (iv1.isEnabled() && iv2.isEnabled() && iv3.isEnabled() && iv4.isEnabled() && iv5.isEnabled() && iv6.isEnabled() && iv7.isEnabled() && iv8.isEnabled()) {
-                    nbClick++;
-                    lifeBar.setProgress(100 - nbClick * 20);
-                    checkLose(nbClick);
+                    countClick++;
+                    missClick++;
+                    lifeBar.setProgress(100 - missClick * 20);
+                    checkLose(missClick);
                     ivStar.setImageResource(R.drawable.dog_laughing);
                     ivStar.setVisibility(View.VISIBLE);
                 }
@@ -224,8 +224,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void clikImage(int result, int[] intervalle, TextView tvScore) {
+    private void clickImage(int result, int[] intervalle, TextView tvScore) {
         if (result == answer) {
+            countClick++;
             score++;
             tvScore.setText("Score : " + score);
             checkScore(score, intervalle);
@@ -233,12 +234,20 @@ public class MainActivity extends AppCompatActivity {
             ivStar.setImageResource(R.drawable.star_jumping);
             ivStar.setVisibility(View.VISIBLE);
         } else {
-            nbClick++;
-            lifeBar.setProgress(100 - nbClick * 20);
-            checkLose(nbClick);
+            countClick++;
+            missClick++;
+            lifeBar.setProgress(100 - missClick * 20);
+            checkLose(missClick);
             iv1.setEnabled(false);
             ivStar.setImageResource(R.drawable.dog_laughing);
             ivStar.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void goToScoreActivity() {
+        Intent goToNewActivity = new Intent(MainActivity.this, ScoreActivity.class);
+        goToNewActivity.putExtra("score", score);
+        goToNewActivity.putExtra("accuracy", countClick);
+        startActivity(goToNewActivity);
     }
 }
