@@ -20,5 +20,18 @@ public class ScoreActivity extends AppCompatActivity {
         tvScore.setText("Your final score is : " + score);
         TextView tvAccuracy = findViewById(R.id.tvAccuracy);
         tvAccuracy.setText("Your accuracy is : " + score * 100 / accuracy + "%");
+        TextView tvPhrase = findViewById(R.id.tvPhrase);
+        if (score<20) {
+            tvPhrase.setText("Thanks for playing but this game is not made for you, obviously !");
+        }
+        if (score>=20 && score<40) {
+            tvPhrase.setText("Not bad ! Feel free to purchase the app on Google Play Store to try again");
+        }
+        if (score>=40 && score<=60) {
+            tvPhrase.setText("Well done ! Yet you still have a long way to beat our master guru Bastien !");
+        }
+        if (score>60) {
+            tvPhrase.setText("Congratulations, but princess Peach is in another castle, try again !");
+        }
     }
 }
