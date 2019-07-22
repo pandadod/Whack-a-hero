@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
                     tvScore.setText(String.valueOf(score));
                     checkScore(score, intervalle);
                     iv1.setEnabled(false);
-
-
                 }
                 nbClick++;
             }
