@@ -10,11 +10,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
-    private List<Hero> heroesList = new ArrayList<>();
+    private Set<Hero> heroesList = new HashSet<>();
     private ImageView iv1;
     private ImageView iv2;
     private ImageView iv3;
@@ -178,25 +180,22 @@ public class MainActivity extends AppCompatActivity {
                 ivList.add(iv7);
                 ivList.add(iv8);
 
-                for (int i = 0; i < ivList.size(); i++) {
-                    Hero hero = heroesList.get(i);
+                int countHero = 0;
+                for (Hero hero : heroesList) {
                     String url = hero.getUrl();
-                    Glide.with(MainActivity.this).load(url).into(ivList.get(i));
+                    Glide.with(MainActivity.this).load(url).into(ivList.get(countHero));
+                    countHero++;
                 }
 
                 Runnable runnable = new Runnable() {
 
                     @Override
                     public void run() {
-
-
                         setImage(heroesList, ivAnswer);
-
                         ivAnswer.postDelayed(this, intervalle[0]);
                     }
                 };
                 runnable.run();
-
             }
         });
     }
@@ -211,25 +210,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setImage(List<Hero> heroesList, ImageView ivAnswer) {
+    private void setImage(Set<Hero> heroesList, ImageView ivAnswer) {
 
         Random r = new Random();
         int index = r.nextInt((7 - 0) + 1) + 0;
         if (index == answer) {
             index = r.nextInt((7 - 0) + 1) + 0;
         }
-        Hero heroAnswer = heroesList.get(index);
-        String urlAnswer = heroAnswer.getUrl();
-        answer = index;
-        Glide.with(MainActivity.this).load(urlAnswer).into(ivAnswer);
-        iv1.setEnabled(true);
-        iv2.setEnabled(true);
-        iv3.setEnabled(true);
-        iv4.setEnabled(true);
-        iv5.setEnabled(true);
-        iv6.setEnabled(true);
-        iv7.setEnabled(true);
-        iv8.setEnabled(true);
 
+        int count = 0;
+        for (Hero hero : heroesList) {
+            if (count == index) {
+                String urlAnswer = hero.getUrl();
+                answer = index;
+                Glide.with(MainActivity.this).load(urlAnswer).into(ivAnswer);
+                iv1.setEnabled(true);
+                iv2.setEnabled(true);
+                iv3.setEnabled(true);
+                iv4.setEnabled(true);
+                iv5.setEnabled(true);
+                iv6.setEnabled(true);
+                iv7.setEnabled(true);
+                iv8.setEnabled(true);
+            }
+            count++;
+        }
     }
 }
