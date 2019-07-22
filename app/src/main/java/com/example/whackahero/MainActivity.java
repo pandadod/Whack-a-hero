@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     tvScore.setText("Score : " + score);
                     checkScore(score, intervalle);
                     iv1.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.smiley_face_jumping);
+                    ivStar.setImageResource(R.drawable.star_jumping);
                     ivStar.setVisibility(View.VISIBLE);
                 } else {
                     nbClick++;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     tvScore.setText("Score : " + score);
                     checkScore(score, intervalle);
                     iv2.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.smiley_face_jumping);
+                    ivStar.setImageResource(R.drawable.star_jumping);
                     ivStar.setVisibility(View.VISIBLE);
                 } else {
                     nbClick++;
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                     tvScore.setText("Score : " + score);
                     checkScore(score, intervalle);
                     iv3.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.smiley_face_jumping);
+                    ivStar.setImageResource(R.drawable.star_jumping);
                     ivStar.setVisibility(View.VISIBLE);
                 } else {
                     nbClick++;
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                     tvScore.setText("Score : " + score);
                     checkScore(score, intervalle);
                     iv4.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.smiley_face_jumping);
+                    ivStar.setImageResource(R.drawable.star_jumping);
                     ivStar.setVisibility(View.VISIBLE);
                 } else {
                     nbClick++;
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     tvScore.setText("Score : " + score);
                     checkScore(score, intervalle);
                     iv5.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.smiley_face_jumping);
+                    ivStar.setImageResource(R.drawable.star_jumping);
                     ivStar.setVisibility(View.VISIBLE);
                 } else {
                     nbClick++;
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                     tvScore.setText("Score : " + score);
                     checkScore(score, intervalle);
                     iv6.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.smiley_face_jumping);
+                    ivStar.setImageResource(R.drawable.star_jumping);
                     ivStar.setVisibility(View.VISIBLE);
                 } else {
                     nbClick++;
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     tvScore.setText("Score : " + score);
                     checkScore(score, intervalle);
                     iv7.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.smiley_face_jumping);
+                    ivStar.setImageResource(R.drawable.star_jumping);
                     ivStar.setVisibility(View.VISIBLE);
                 } else {
                     nbClick++;
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                     tvScore.setText("Score : " + score);
                     checkScore(score, intervalle);
                     iv8.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.smiley_face_jumping);
+                    ivStar.setImageResource(R.drawable.star_jumping);
                     ivStar.setVisibility(View.VISIBLE);
                 } else {
                     nbClick++;
