@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageView iv6 = findViewById(R.id.iv6);
         final ImageView iv7 = findViewById(R.id.iv7);
         final ImageView iv8 = findViewById(R.id.iv8);
+        final ImageView ivAnswer = findViewById(R.id.ivAnswer);
 
         Helper.extractHero(MainActivity.this, new Helper.HeroListener() {
             @Override
@@ -47,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
                 ivList.add(iv6);
                 ivList.add(iv7);
                 ivList.add(iv8);
+
+                Random r = new Random();
+                int index = r.nextInt((7 - 0) + 1) + 0;
+                Hero heroAnswer = heroesList.get(index);
+                String urlAnswer = heroAnswer.getUrl();
+                Glide.with(MainActivity.this).load(urlAnswer).into(ivAnswer);
+
                 for (int i = 0; i < ivList.size(); i++) {
                     Hero hero = heroesList.get(i);
                     String url = hero.getUrl();
@@ -56,5 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 }
