@@ -212,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
             music.setPlaybackParams(music.getPlaybackParams().setSpeed(speed));
         }
         if (score >= 40) {
+            music.stop();
             Intent goToNewActivity = new Intent(MainActivity.this, ScoreActivity.class);
             startActivity(goToNewActivity);
         }
