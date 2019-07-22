@@ -1,6 +1,7 @@
 package com.example.whackahero;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,11 +30,17 @@ public class MainActivity extends AppCompatActivity {
     private int answer;
     private int score;
     private int nbClick;
+    private MediaPlayer music;
+    private float speed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        speed = 1;
+        music= MediaPlayer.create(MainActivity.this,R.raw.music_tetris);
+        music.start();
+
         final int[] intervalle = {2000};
         final TextView tvScore = findViewById(R.id.tvScore);
         ivAnswer = findViewById(R.id.ivAnswer);
@@ -201,6 +208,8 @@ public class MainActivity extends AppCompatActivity {
     private void checkScore(int score, int[] intervalle) {
         if (score > 0 && score % 10 == 0 && intervalle[0] > 0) {
             intervalle[0] -= 500;
+            speed += 0.2;
+            music.setPlaybackParams(music.getPlaybackParams().setSpeed(speed));
         }
         if (score >= 40) {
             Intent goToNewActivity = new Intent(MainActivity.this, ScoreActivity.class);
