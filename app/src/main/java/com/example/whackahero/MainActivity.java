@@ -316,6 +316,13 @@ public class MainActivity extends AppCompatActivity {
                 String urlAnswer = hero.getUrl();
                 answer = index;
                 Glide.with(MainActivity.this).load(urlAnswer).into(ivAnswer);
+                if (iv1.isEnabled() && iv2.isEnabled() &&iv3.isEnabled() &&iv4.isEnabled() &&iv5.isEnabled() &&iv6.isEnabled() &&iv7.isEnabled() &&iv8.isEnabled()) {
+                    nbClick++;
+                    lifeBar.setProgress(100 - nbClick * 20);
+                    checkLose(nbClick);
+                    ivStar.setImageResource(R.drawable.dog_laughing);
+                    ivStar.setVisibility(View.VISIBLE);
+                }
                 iv1.setEnabled(true);
                 iv2.setEnabled(true);
                 iv3.setEnabled(true);
