@@ -59,21 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 0;
-                if (result == answer) {
-                    score++;
-                    tvScore.setText("Score : " + score);
-                    checkScore(score, intervalle);
-                    iv1.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.star_jumping);
-                    ivStar.setVisibility(View.VISIBLE);
-                } else {
-                    nbClick++;
-                    lifeBar.setProgress(100 - nbClick * 20);
-                    checkLose(nbClick);
-                    iv1.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.dog_laughing);
-                    ivStar.setVisibility(View.VISIBLE);
-                }
+                clikImage(result, intervalle, tvScore);
             }
         });
 
@@ -82,21 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 1;
-                if (result == answer) {
-                    score++;
-                    tvScore.setText("Score : " + score);
-                    checkScore(score, intervalle);
-                    iv2.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.star_jumping);
-                    ivStar.setVisibility(View.VISIBLE);
-                } else {
-                    nbClick++;
-                    lifeBar.setProgress(100 - nbClick * 20);
-                    checkLose(nbClick);
-                    iv2.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.dog_laughing);
-                    ivStar.setVisibility(View.VISIBLE);
-                }
+                clikImage(result, intervalle, tvScore);
             }
         });
 
@@ -105,21 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 2;
-                if (result == answer) {
-                    score++;
-                    tvScore.setText("Score : " + score);
-                    checkScore(score, intervalle);
-                    iv3.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.star_jumping);
-                    ivStar.setVisibility(View.VISIBLE);
-                } else {
-                    nbClick++;
-                    lifeBar.setProgress(100 - nbClick * 20);
-                    checkLose(nbClick);
-                    iv3.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.dog_laughing);
-                    ivStar.setVisibility(View.VISIBLE);
-                }
+                clikImage(result, intervalle, tvScore);
             }
         });
 
@@ -128,21 +86,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 3;
-                if (result == answer) {
-                    score++;
-                    tvScore.setText("Score : " + score);
-                    checkScore(score, intervalle);
-                    iv4.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.star_jumping);
-                    ivStar.setVisibility(View.VISIBLE);
-                } else {
-                    nbClick++;
-                    lifeBar.setProgress(100 - nbClick * 20);
-                    checkLose(nbClick);
-                    iv4.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.dog_laughing);
-                    ivStar.setVisibility(View.VISIBLE);
-                }
+                clikImage(result, intervalle, tvScore);
             }
         });
 
@@ -151,21 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 4;
-                if (result == answer) {
-                    score++;
-                    tvScore.setText("Score : " + score);
-                    checkScore(score, intervalle);
-                    iv5.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.star_jumping);
-                    ivStar.setVisibility(View.VISIBLE);
-                } else {
-                    nbClick++;
-                    lifeBar.setProgress(100 - nbClick * 20);
-                    checkLose(nbClick);
-                    iv5.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.dog_laughing);
-                    ivStar.setVisibility(View.VISIBLE);
-                }
+                clikImage(result, intervalle, tvScore);
             }
         });
 
@@ -174,21 +104,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 5;
-                if (result == answer) {
-                    score++;
-                    tvScore.setText("Score : " + score);
-                    checkScore(score, intervalle);
-                    iv6.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.star_jumping);
-                    ivStar.setVisibility(View.VISIBLE);
-                } else {
-                    nbClick++;
-                    lifeBar.setProgress(100 - nbClick * 20);
-                    checkLose(nbClick);
-                    iv6.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.dog_laughing);
-                    ivStar.setVisibility(View.VISIBLE);
-                }
+                clikImage(result, intervalle, tvScore);
             }
         });
 
@@ -197,21 +113,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 6;
-                if (result == answer) {
-                    score++;
-                    tvScore.setText("Score : " + score);
-                    checkScore(score, intervalle);
-                    iv7.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.star_jumping);
-                    ivStar.setVisibility(View.VISIBLE);
-                } else {
-                    nbClick++;
-                    lifeBar.setProgress(100 - nbClick * 20);
-                    checkLose(nbClick);
-                    iv7.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.dog_laughing);
-                    ivStar.setVisibility(View.VISIBLE);
-                }
+                clikImage(result, intervalle, tvScore);
             }
         });
 
@@ -220,21 +122,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 7;
-                if (result == answer) {
-                    score++;
-                    tvScore.setText("Score : " + score);
-                    checkScore(score, intervalle);
-                    iv8.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.star_jumping);
-                    ivStar.setVisibility(View.VISIBLE);
-                } else {
-                    nbClick++;
-                    lifeBar.setProgress(100 - nbClick * 20);
-                    checkLose(nbClick);
-                    iv8.setEnabled(false);
-                    ivStar.setImageResource(R.drawable.dog_laughing);
-                    ivStar.setVisibility(View.VISIBLE);
-                }
+                clikImage(result, intervalle, tvScore);
             }
         });
 
@@ -333,6 +221,24 @@ public class MainActivity extends AppCompatActivity {
                 ivStar.setVisibility(View.INVISIBLE);
             }
             count++;
+        }
+    }
+
+    private void clikImage(int result, int[] intervalle, TextView tvScore) {
+        if (result == answer) {
+            score++;
+            tvScore.setText("Score : " + score);
+            checkScore(score, intervalle);
+            iv1.setEnabled(false);
+            ivStar.setImageResource(R.drawable.star_jumping);
+            ivStar.setVisibility(View.VISIBLE);
+        } else {
+            nbClick++;
+            lifeBar.setProgress(100 - nbClick * 20);
+            checkLose(nbClick);
+            iv1.setEnabled(false);
+            ivStar.setImageResource(R.drawable.dog_laughing);
+            ivStar.setVisibility(View.VISIBLE);
         }
     }
 }
