@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    private List<Hero> heroesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         Helper.extractHero(MainActivity.this, new Helper.HeroListener() {
             @Override
             public void onHeroesLoaded(List<Hero> heroes) {
-                List<Hero> heroesList = new ArrayList<>();
                 int count = 0;
                 while (count < 8) {
                     Random r = new Random();
@@ -49,21 +49,29 @@ public class MainActivity extends AppCompatActivity {
                 ivList.add(iv7);
                 ivList.add(iv8);
 
-                Random r = new Random();
-                int index = r.nextInt((7 - 0) + 1) + 0;
-                Hero heroAnswer = heroesList.get(index);
-                String urlAnswer = heroAnswer.getUrl();
-                Glide.with(MainActivity.this).load(urlAnswer).into(ivAnswer);
-
                 for (int i = 0; i < ivList.size(); i++) {
                     Hero hero = heroesList.get(i);
                     String url = hero.getUrl();
                     Glide.with(MainActivity.this).load(url).into(ivList.get(i));
-                    heroes.remove(hero);
                 }
+                new Runnable() {
+                    int intervalle = 1000;
 
+                    @Override
+                    public void run() {
+                        setImage(heroesList, ivAnswer);
+                        ivAnswer.postDelayed(this, intervalle);
+                    }
+                }.run();
             }
         });
+    }
 
+    private void setImage(List<Hero> heroesList, ImageView ivAnswer) {
+        Random r = new Random();
+        int index = r.nextInt((7 - 0) + 1) + 0;
+        Hero heroAnswer = heroesList.get(index);
+        String urlAnswer = heroAnswer.getUrl();
+        Glide.with(MainActivity.this).load(urlAnswer).into(ivAnswer);
     }
 }

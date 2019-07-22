@@ -23,7 +23,7 @@ public class Helper {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        String url = "https://akabab.github.io/superhero-api/api/all.json";
+        String url = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api/all.json";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
