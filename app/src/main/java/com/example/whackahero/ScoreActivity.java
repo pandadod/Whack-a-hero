@@ -26,6 +26,15 @@ public class ScoreActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int score = intent.getIntExtra("score", -1);
         int accuracy = intent.getIntExtra("accuracy", -1);
+        boolean isHard = intent.getBooleanExtra("booleen", false);
+        if (isHard) {
+            accuracy = score*100/accuracy;
+            score *= 1.5;
+
+        } else {
+            accuracy = score*100/accuracy;
+        }
+
         Button btPlayAgain = findViewById(R.id.btPlayAgain);
         btPlayAgain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +47,7 @@ public class ScoreActivity extends AppCompatActivity {
         TextView tvScore = findViewById(R.id.tvScore);
         tvScore.setText("Your final score is : " + score);
         TextView tvAccuracy = findViewById(R.id.tvAccuracy);
-        tvAccuracy.setText("Your accuracy is : " + score * 100 / accuracy + "%");
+        tvAccuracy.setText("Your accuracy is : " + accuracy + "%");
         TextView tvPhrase = findViewById(R.id.tvPhrase);
         if (score < 20) {
             tvPhrase.setText("Thanks for playing but this game is not made for you, obviously !");

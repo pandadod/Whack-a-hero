@@ -263,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
         Intent goToNewActivity = new Intent(MainActivity.this, ScoreActivity.class);
         goToNewActivity.putExtra("score", score);
         goToNewActivity.putExtra("accuracy", countClick);
+        goToNewActivity.putExtra("booleen", isHard);
         startActivity(goToNewActivity);
     }
 }
