@@ -6,6 +6,8 @@ import android.support.v4.util.Consumer;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +26,14 @@ public class ScoreActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int score = intent.getIntExtra("score", -1);
         int accuracy = intent.getIntExtra("accuracy", -1);
+        Button btPlayAgain = findViewById(R.id.btPlayAgain);
+        btPlayAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToMainActivity = new Intent(ScoreActivity.this, MainActivity.class);
+                startActivity(goToMainActivity);
+            }
+        });
 
         TextView tvScore = findViewById(R.id.tvScore);
         tvScore.setText("Your final score is : " + score);
@@ -71,19 +81,21 @@ public class ScoreActivity extends AppCompatActivity {
                 }
             });
         }
+        else {
+            SingletonVolley.getInstance(ScoreActivity.this).getAllUsers(new Consumer<List<User>>() {
+                @Override
+                public void accept(List<User> users) {
+                    usersList.addAll(users);
+                    Collections.sort(usersList, new Comparator<User>() {
+                        @Override
+                        public int compare(User o1, User o2) {
+                            return o2.getScoreMax() > o1.getScoreMax() ? 1 : -1;
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
 
-        SingletonVolley.getInstance(ScoreActivity.this).getAllUsers(new Consumer<List<User>>() {
-            @Override
-            public void accept(List<User> users) {
-                usersList.addAll(users);
-                Collections.sort(usersList, new Comparator<User>() {
-                    @Override
-                    public int compare(User o1, User o2) {
-                        return o2.getScoreMax() > o1.getScoreMax() ? 1 : -1;
-                    }
-                });
-                adapter.notifyDataSetChanged();
-            }
-        });
     }
 }
