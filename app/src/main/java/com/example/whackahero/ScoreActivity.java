@@ -4,7 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.util.Consumer;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class ScoreActivity extends AppCompatActivity {
 
@@ -35,6 +42,12 @@ public class ScoreActivity extends AppCompatActivity {
         if (score > 60) {
             tvPhrase.setText("Congratulations, but princess Peach is in another castle, try again !");
         }
+        final List<User> usersList = new ArrayList<>();
+        RecyclerView rvRecipe = findViewById(R.id.rvScores);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvRecipe.setLayoutManager(layoutManager);
+        final UserAdapter adapter = new UserAdapter(usersList);
+        rvRecipe.setAdapter(adapter);
 
         if (score > user.getScoreMax()) {
             user.setScoreMax(score);
@@ -42,8 +55,35 @@ public class ScoreActivity extends AppCompatActivity {
                 @Override
                 public void accept(User user) {
                     UserSingleton.getInstance().setUser(user);
+                    SingletonVolley.getInstance(ScoreActivity.this).getAllUsers(new Consumer<List<User>>() {
+                        @Override
+                        public void accept(List<User> users) {
+                            usersList.addAll(users);
+                            Collections.sort(usersList, new Comparator<User>() {
+                                @Override
+                                public int compare(User o1, User o2) {
+                                    return o2.getScoreMax() > o1.getScoreMax() ? 1 : -1;
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
                 }
             });
         }
+
+        SingletonVolley.getInstance(ScoreActivity.this).getAllUsers(new Consumer<List<User>>() {
+            @Override
+            public void accept(List<User> users) {
+                usersList.addAll(users);
+                Collections.sort(usersList, new Comparator<User>() {
+                    @Override
+                    public int compare(User o1, User o2) {
+                        return o2.getScoreMax() > o1.getScoreMax() ? 1 : -1;
+                    }
+                });
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
