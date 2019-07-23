@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,15 +22,15 @@ import pl.droidsonroids.gif.GifImageView;
 
 public class MainActivity extends AppCompatActivity {
     private Set<Hero> heroesList = new HashSet<>();
-    private ImageView iv1;
-    private ImageView iv2;
-    private ImageView iv3;
-    private ImageView iv4;
-    private ImageView iv5;
-    private ImageView iv6;
-    private ImageView iv7;
-    private ImageView iv8;
-    private ImageView ivAnswer;
+    private RoundedImageView iv1;
+    private RoundedImageView iv2;
+    private RoundedImageView iv3;
+    private RoundedImageView iv4;
+    private RoundedImageView iv5;
+    private RoundedImageView iv6;
+    private RoundedImageView iv7;
+    private RoundedImageView iv8;
+    private RoundedImageView ivAnswer;
     private int answer;
     private int score;
     private int missClick;
@@ -39,11 +40,16 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar lifeBar;
     private GifImageView ivStar;
     private Runnable runnable;
+    private boolean isHard;
+    private List<ImageView> ivList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+        isHard = intent.getBooleanExtra("booleen", false);
+        heroesList = SingletonHeroesList.getInstance().getHeroesList();
         speed = 1;
         music = MediaPlayer.create(MainActivity.this, R.raw.music_tetris);
         music.start();
@@ -127,48 +133,58 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Helper.extractHero(MainActivity.this, new Helper.HeroListener() {
+        ivList = new ArrayList<>();
+        ivList.add(iv1);
+        ivList.add(iv2);
+        ivList.add(iv3);
+        ivList.add(iv4);
+        ivList.add(iv5);
+        ivList.add(iv6);
+        ivList.add(iv7);
+        ivList.add(iv8);
+        int countHero = 0;
+        for (Hero hero : heroesList) {
+            String url = hero.getUrl();
+            Glide.with(MainActivity.this).load(url).into(ivList.get(countHero));
+            countHero++;
+        }
+
+        runnable = new Runnable() {
             @Override
-            public void onHeroesLoaded(List<Hero> heroes) {
-                int count = 0;
-                while (count < 8) {
-                    Random r = new Random();
-                    int index = r.nextInt((500 - 0) + 1) + 0;
-                    Hero hero = heroes.get(index);
-                    heroesList.add(hero);
-                    count++;
-                }
-                List<ImageView> ivList = new ArrayList<>();
-                ivList.add(iv1);
-                ivList.add(iv2);
-                ivList.add(iv3);
-                ivList.add(iv4);
-                ivList.add(iv5);
-                ivList.add(iv6);
-                ivList.add(iv7);
-                ivList.add(iv8);
-
-                int countHero = 0;
-                for (Hero hero : heroesList) {
-                    String url = hero.getUrl();
-                    Glide.with(MainActivity.this).load(url).into(ivList.get(countHero));
-                    countHero++;
-                }
-
-                runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        setImage(heroesList, ivAnswer);
-                        ivAnswer.postDelayed(this, intervalle[0]);
-                    }
-                };
-                runnable.run();
+            public void run() {
+                setImage(heroesList, ivAnswer);
+                ivAnswer.postDelayed(this, intervalle[0]);
             }
-        });
+        };
+        runnable.run();
     }
 
     private void checkScore(int score, int[] intervalle) {
         if (score > 0 && score % 10 == 0 && intervalle[0] > 0) {
+            if (isHard) {
+                heroesList.clear();
+                Helper.extractHero(MainActivity.this, new Helper.HeroListener() {
+                    @Override
+                    public void onHeroesLoaded(List<Hero> heroes) {
+                        int count = 0;
+                        while (count < 8) {
+                            Random r = new Random();
+                            int index = r.nextInt((500 - 0) + 1) + 0;
+                            Hero hero = heroes.get(index);
+                            heroesList.add(hero);
+                            count++;
+                        }
+
+                        SingletonHeroesList.getInstance().setHeroesList(heroesList);
+                        int countHero = 0;
+                        for (Hero hero : heroesList) {
+                            String url = hero.getUrl();
+                            Glide.with(MainActivity.this).load(url).into(ivList.get(countHero));
+                            countHero++;
+                        }
+                    }
+                });
+            }
             intervalle[0] -= 200;
             speed += 0.1;
             music.setPlaybackParams(music.getPlaybackParams().setSpeed(speed));
@@ -248,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
         Intent goToNewActivity = new Intent(MainActivity.this, ScoreActivity.class);
         goToNewActivity.putExtra("score", score);
         goToNewActivity.putExtra("accuracy", countClick);
+        goToNewActivity.putExtra("booleen", isHard);
         startActivity(goToNewActivity);
     }
 }

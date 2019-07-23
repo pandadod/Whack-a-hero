@@ -36,14 +36,11 @@ public class ConnexionActivity extends AppCompatActivity {
                                     user.getPassword(),
                                     user.getScoreMax());
                             UserSingleton.getInstance().getUser();
-
-                            Intent goToMainActivity = new Intent(ConnexionActivity.this, MainActivity.class);
-                            startActivity(goToMainActivity);
+                            goToDifficulty();
 
                         } else {
                             Toast.makeText(ConnexionActivity.this, "erreur", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
             }
@@ -67,12 +64,16 @@ public class ConnexionActivity extends AppCompatActivity {
                         @Override
                         public void accept(User user) {
                             UserSingleton.getInstance().setUser(user);
-                            Intent intent = new Intent(ConnexionActivity.this, MainActivity.class);
-                            startActivity(intent);
+                            goToDifficulty();
                         }
                     });
                 }
             }
         });
+    }
+
+    private void goToDifficulty() {
+        Intent goToNewActivity = new Intent(ConnexionActivity.this, DifficultyActivity.class);
+        startActivity(goToNewActivity);
     }
 }
