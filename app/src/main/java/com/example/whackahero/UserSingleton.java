@@ -1,7 +1,5 @@
 package com.example.whackahero;
 
-import java.util.List;
-
 public class UserSingleton {
 
     private static UserSingleton instance;
@@ -21,11 +19,11 @@ public class UserSingleton {
         return user;
     }
 
-    public void initiateUser(Long idUser, String login, String password, int scoreMax) {
-        user = new User(idUser, login, password, scoreMax);
-    }
-
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void initiateUser(Long idUser, String login, String password, int scoreMax) {
+        user = new User(idUser, login, password, scoreMax);
     }
 }
