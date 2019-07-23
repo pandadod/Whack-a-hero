@@ -51,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
         isHard = intent.getBooleanExtra("booleen", false);
         heroesList = SingletonHeroesList.getInstance().getHeroesList();
         speed = 1;
-        music = MediaPlayer.create(MainActivity.this, R.raw.music_tetris);
+        if (isHard) {
+            music = MediaPlayer.create(MainActivity.this, R.raw.mario);
+        } else {
+            music = MediaPlayer.create(MainActivity.this, R.raw.music_tetris);
+        }
         music.start();
 
         lifeBar = findViewById(R.id.lifebar);
