@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,15 +22,15 @@ import pl.droidsonroids.gif.GifImageView;
 
 public class MainActivity extends AppCompatActivity {
     private Set<Hero> heroesList = new HashSet<>();
-    private ImageView iv1;
-    private ImageView iv2;
-    private ImageView iv3;
-    private ImageView iv4;
-    private ImageView iv5;
-    private ImageView iv6;
-    private ImageView iv7;
-    private ImageView iv8;
-    private ImageView ivAnswer;
+    private RoundedImageView iv1;
+    private RoundedImageView iv2;
+    private RoundedImageView iv3;
+    private RoundedImageView iv4;
+    private RoundedImageView iv5;
+    private RoundedImageView iv6;
+    private RoundedImageView iv7;
+    private RoundedImageView iv8;
+    private RoundedImageView ivAnswer;
     private int answer;
     private int score;
     private int missClick;
