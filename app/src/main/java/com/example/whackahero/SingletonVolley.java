@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class SingletonVolley {
 
-    private final static String REQUEST_URL = "http://192.168.1.21:8080";
+    private final static String REQUEST_URL = "http://192.168.1.120:8080";
     private static SingletonVolley instance;
     private static Context ctx;
     private RequestQueue requestQueue;
