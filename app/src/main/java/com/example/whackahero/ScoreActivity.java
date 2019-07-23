@@ -30,8 +30,8 @@ public class ScoreActivity extends AppCompatActivity {
         btPlayAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToMainActivity = new Intent(ScoreActivity.this, MainActivity.class);
-                startActivity(goToMainActivity);
+                Intent goToDifficultyActivity = new Intent(ScoreActivity.this, DifficultyActivity.class);
+                startActivity(goToDifficultyActivity);
             }
         });
 
@@ -80,8 +80,7 @@ public class ScoreActivity extends AppCompatActivity {
                     });
                 }
             });
-        }
-        else {
+        } else {
             SingletonVolley.getInstance(ScoreActivity.this).getAllUsers(new Consumer<List<User>>() {
                 @Override
                 public void accept(List<User> users) {
